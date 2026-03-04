@@ -24,4 +24,4 @@
 **Βήμα 1: Κάντε Clone το Repository**
 Ανοίξτε το τερματικό σας και τρέξτε:
 ```bash
-git clone [[https://github.com/anatheodor/UoP-GameDev-Course.git](https://github.com/YOUR-USERNAME/YOUR-REPO-NAME.git)
+git clone [https://github.com/anatheodor/UoP-GameDev-Course.git](https://github.com/anatheodor/UoP-GameDev-Course.git)
