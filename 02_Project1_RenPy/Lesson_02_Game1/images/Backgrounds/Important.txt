@@ -1,0 +1,1 @@
+All backgrounds were created using Stable Diffusion Automatic 1111 and are subject to the terms of the CreativeML Open RAIL-M (Responsible AI License).
