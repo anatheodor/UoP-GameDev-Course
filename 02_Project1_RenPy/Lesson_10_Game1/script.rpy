@@ -1,4 +1,4 @@
-﻿# Defining the characters
+# Defining the characters
 define player = Character("[player_name]", color="FFFFFF")
 define e = Character("Emma", color="#FFC0CB", image = "emma")
 define a = Character("Alex", color="#ADD8E6", image = "alex")
@@ -14,8 +14,8 @@ default relationship_lily = 0
 define praise_alex = False 
 define praise_emma = False
 
-
 # Sprite Transformations 
+
 transform far_left:
     xalign 0.2 
     yalign 1.0 
@@ -24,10 +24,9 @@ transform far_right:
     xalign 0.8 
     yalign 1.0
 
-
 # Character sprites
 # Alex
-image Alex normal = ("images/Sprites/Alex normal.png")
+image Alex normal = ("images/Alex normal.png")
 image Alex angry = ("images/Alex angry.png")
 image Alex happy = ("images/Alex happy.png")
 image Alex sad = ("images/Alex sad.png")
@@ -66,7 +65,6 @@ screen relationship_status2():
             text "Emma: [relationship_emma]" color "#FFB6C1"
             text "Lily: [relationship_lily]" color "#FF0000"
 
-
 label start:
     scene bg classroom blurred with dissolve
 
@@ -76,8 +74,8 @@ label start:
 
     scene bg classroom day with fade
     play music "audio/main_theme.mp3" loop
-    principal "Welcome to the Performing and Digital Arts Department, [player_name]!"
-    principal "We are happy to see you at University of the Peloponnese. Here, you'll find not only knowledge but also friends."
+    principal "Welcome to the Academy of Arts, [player_name]!"
+    principal "We are happy to see you in our school. Here, you'll find not only knowledge but also friends."
     principal "Let me introduce you to our students. They will help you settle in."
     principal "In this game, you must make at least one best friend, or you'll lose..."
 
@@ -85,7 +83,6 @@ label start:
     jump meet_characters
 
 label meet_characters:
-    
     scene bg classroom_2 with dissolve
 
     # Alex
@@ -110,20 +107,20 @@ label meet_characters:
     menu:
         "I also love reading. Maybe you could recommend something?":
             $ relationship_emma += 1
-            e happy "Of course! We have a great collection of books at Aria building. Come by, and I'll show you."
+            e happy "Of course! We have a great collection of books. Come by, and I'll show you."
 
         "Drawing is awesome. You must be really good at it.":
             $ relationship_emma += 1
             e happy "Thank you! Maybe I'll draw you one day."
-
     stop music fadeout 2.0
     hide emma 
+
 
 label first_day:
     scene bg hallway with fade
     show screen relationship_status
 
-    player "The first day at the new university... I wonder, where should I start?"
+    player "The first day at the new academy... I wonder, where should I start?"
 
     menu:
         "Go to training with Alex.":
@@ -175,11 +172,12 @@ label emma_day:
     stop music fadeout 2.0 
     jump next_day
 
+
 label next_day:
     scene bg schoolyard day with fade
     play music "audio/traffic_noise.mp3" loop 
     play sound "audio/argument.mp3" loop 
-    player "Today, I decided to take a walk around the univeristy yard. It looks like someone is arguing over there..."
+    player "Today, I decided to take a walk around the school yard. It looks like someone is arguing over there..."
 
     show alex normal at far_left 
     show emma normal at far_right 
@@ -451,7 +449,6 @@ label cipher_fail:
     hide fail with dissolve
     return
 
-
 label lily_vs_others:
     scene bg schoolyard day with fade
     play music "audio/traffic_noise.mp3" loop 
@@ -497,110 +494,3 @@ label lily_vs_others:
     stop music fadeout 2.0
     stop sound fadeout 2.0
     jump determine_ending
-
-
-label lily_ending:
-    play music "audio/comedy.mp3" loop 
-    scene bg schoolyard day with fade 
-    show lily happy at center 
-
-    l happy "I'm glad you stayed with me to the end. Very few people realize that you have to fight for your ambitions."
-    l normal "Together we can acomplish anything we want. What do you say?"
-
-    menu:
-        "To agree and become her partner.":
-            play sound "audio/woman_laugh.mp3"
-            $ relationship_lily += 5
-            l happy "I knew you'd make the right choice. We'll get through this."
-            player "Lily's ambitious ending."
-            jump end_game
-
-        "Give up and go your own way.":
-            play sound "glass_breaking.mp3"
-            $ relationship_lily -= 5 
-            l sad "I thought you were different. I'm sorry I was wrong."
-            player "Breaking ties with Lily."
-            jump end_game
-
-label alex_ending:
-    scene bg pool day with fade
-    play music "audio/friendly.mp3" loop 
-    play audio "audio/pool.mp3" loop 
-    show alex happy at center 
-
-    a normal "I have a crucial competition today, and I want you by my side."
-
-    if praise_alex:
-        a happy "I remember how you supported me in a difficult moment. It helped me to believe in my abilities and I decided to participate."
-    
-    menu:
-        "Support Alex in the competition.":
-            $ relationship_alex += 5
-            show confetti behind alex 
-            a happy "With your support, I was able to do it. Now I know that anything is possible."
-            a happy "Thank you for everything. You are a special person and I want you to always be there for me."
-            player "Romantic ending with Alex."
-            stop audio fadeout 2.0
-            jump end_game
-        
-        "Refuse and stand aside.":
-            $ relationship_alex -= 3
-            a sad "I wish you could share this moment with me."
-            a normal "But I'm still grateful for what you've done for me."
-            player "Friendly ending with Alex."
-            stop audio fadeout 2.0
-            jump end_game
-
-label emma_ending:
-    play music "audio/main_theme.mp3" loop 
-    scene bg art club day with fade 
-    show emma happy at center 
-
-    e happy "I am thankful for everything, your support has helped me achieve this."
-    e happy "My first exhibition is just the beginning, but I never would have decided to do it without your help."
-
-    if praise_emma:
-        e happy "I remember when you praised me. It helped me believe in my talent."
-    
-    menu:
-        "Confess your feelings.":
-            $ relationship_emma += 5
-            show confetti behind emma 
-            e happy "You've always been there for me and understood me like no one else. I'm happy you're here."
-            player "Romantic ending with Emma."
-            jump end_game
-        
-        "Congratulate and stay friends.":
-            $ relationship_emma -= 2
-            e normal "You're my best friend, and I'll never forget that."
-            player "Friendly ending with Emma."
-            jump end_game
-
-label dramatic_ending:
-    play sound "audio/fail_trumpet.mp3"
-    scene bg classroom day with fade
-    player "I ended up alone. No one wanted to stay with me."
-    player "Sometimes the choices we make come with a price, and I realized that too late."
-    player "Bad ending."
-    jump end_game
-    return
-
-label determine_ending:
-    if relationship_alex > relationship_emma and relationship_alex > relationship_lily:
-        jump alex_ending
-    elif relationship_emma > relationship_alex and relationship_emma > relationship_lily:
-        jump emma_ending
-    elif relationship_lily > relationship_alex and relationship_lily > relationship_emma:
-        jump lily_ending
-    else:
-        jump dramatic_ending
-    return
-
-label end_game:
-    # Show Black Background
-    show screen end_screen
-    # Delay Before Exiting to the Main Menu or Ending the Game
-    pause 3
-    # $ renpy.pause(3)
-    # Back to Main Menu
-    return    
